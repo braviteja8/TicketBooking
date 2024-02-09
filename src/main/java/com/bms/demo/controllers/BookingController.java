@@ -1,5 +1,5 @@
 package com.bms.demo.controllers;
-
+import java.util.*;
 import com.bms.demo.dtos.BookShowRequestDto;
 import com.bms.demo.dtos.BookShowResponseDto;
 
@@ -23,16 +23,19 @@ public class BookingController {
         this.bookingService = bookingService;
     }
 
-    public BookShowResponseDto bookShow(BookShowRequestDto request){
+    public BookShowResponseDto bookShow(BookShowRequestDto request) {
         try {
-            Booking booking=bookingService.bookShow(request);
-           return new BookShowResponseDto(booking.getId(), booking.getAmount(), ResponseStatus.SUCCESS,"SUCCESS");
+            Booking booking = bookingService.bookShow(request);
+            return new BookShowResponseDto(booking.getId(), booking.getAmount(), ResponseStatus.SUCCESS, "SUCCESS");
         } catch (UserIsNotValid e) {
-            return  new BookShowResponseDto(null,0,ResponseStatus.FAILURE,USER_INVALID_MESSAGE);
+            System.out.println("Not booked");
+            return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, USER_INVALID_MESSAGE);
         } catch (ShowNotFound e) {
-            return  new BookShowResponseDto(null,0,ResponseStatus.FAILURE,SHOW_INVALID_MESSAGE);
+            return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, SHOW_INVALID_MESSAGE);
         } catch (SeatNotAvailable e) {
-            return  new BookShowResponseDto(null,0,ResponseStatus.FAILURE,SOMETHING_WENT_WRONG);
+            return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, SOMETHING_WENT_WRONG);
         }
+
+
     }
 }
