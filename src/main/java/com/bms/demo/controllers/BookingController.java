@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BookingController {
     private BookingService bookingService;
-    private static final String  USER_INVALID_MESSAGE="User id Invalid";
+    private static final String  USER_INVALID_MESSAGE="User id is not valid";
     private static final String SHOW_INVALID_MESSAGE="show id valid";
     private static final String SOMETHING_WENT_WRONG="something went wrong";
     @Autowired
@@ -28,6 +28,7 @@ public class BookingController {
             Booking booking = bookingService.bookShow(request);
             return new BookShowResponseDto(booking.getId(), booking.getAmount(), ResponseStatus.SUCCESS, "SUCCESS");
         } catch (UserIsNotValid e) {
+
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, USER_INVALID_MESSAGE);
         } catch (ShowNotFound e) {
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, SHOW_INVALID_MESSAGE);
