@@ -29,7 +29,8 @@ public class BookingController {
             return new BookShowResponseDto(booking.getId(), booking.getAmount(), ResponseStatus.SUCCESS, "SUCCESS");
         } catch (UserIsNotValid e) {
             System.out.println("not booked and ticket is not printed");
-            System.out.println("not booked");
+           
+            
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, USER_INVALID_MESSAGE);
         } catch (ShowNotFound e) {
             return new BookShowResponseDto(null, 0, ResponseStatus.FAILURE, SHOW_INVALID_MESSAGE);
